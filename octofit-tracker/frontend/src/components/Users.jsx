@@ -1,10 +1,14 @@
 import { DataView } from './DataView'
 
+const usersEndpoint = import.meta.env?.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+  : 'http://localhost:8000/api/users/'
+
 function Users() {
   return (
     <DataView
       resource="users"
-      endpointPath="/api/users/"
+      endpointUrl={usersEndpoint}
       eyebrow="Profiles"
       title="Users"
       description="Authenticated Octofit members with goals, locations, and favorite activity types."

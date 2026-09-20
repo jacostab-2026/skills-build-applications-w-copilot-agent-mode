@@ -1,11 +1,15 @@
 import { entityLabel } from '../formatters'
 import { DataView } from './DataView'
 
+const leaderboardEndpoint = import.meta.env?.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+  : 'http://localhost:8000/api/leaderboard/'
+
 function Leaderboard() {
   return (
     <DataView
       resource="leaderboard"
-      endpointPath="/api/leaderboard/"
+      endpointUrl={leaderboardEndpoint}
       eyebrow="Competition"
       title="Leaderboard"
       description="Ranked Octofit athletes and teams ordered by performance score."

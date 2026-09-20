@@ -1,11 +1,15 @@
 import { entityLabel, formatDate } from '../formatters'
 import { DataView } from './DataView'
 
+const activitiesEndpoint = import.meta.env?.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+  : 'http://localhost:8000/api/activities/'
+
 function Activities() {
   return (
     <DataView
       resource="activities"
-      endpointPath="/api/activities/"
+      endpointUrl={activitiesEndpoint}
       eyebrow="Activity log"
       title="Activities"
       description="Recent workouts, mileage, effort, and completion dates from the Octofit API."

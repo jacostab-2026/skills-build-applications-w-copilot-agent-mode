@@ -1,10 +1,14 @@
 import { DataView } from './DataView'
 
+const workoutsEndpoint = import.meta.env?.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+  : 'http://localhost:8000/api/workouts/'
+
 function Workouts() {
   return (
     <DataView
       resource="workouts"
-      endpointPath="/api/workouts/"
+      endpointUrl={workoutsEndpoint}
       eyebrow="Suggestions"
       title="Workouts"
       description="Personalized training sessions and activity blocks served by the logic tier."
