@@ -1,13 +1,27 @@
-const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+const codespaceName = import.meta.env?.VITE_CODESPACE_NAME ?? ''
+
+const apiPaths = {
+  activities: '/api/activities/',
+  leaderboard: '/api/leaderboard/',
+  teams: '/api/teams/',
+  users: '/api/users/',
+  workouts: '/api/workouts/',
+}
 
 export const apiBaseUrl = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev/api`
-  : 'http://localhost:8000/api'
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000'
 
 export const isCodespaceApiConfigured = Boolean(codespaceName)
 
 export function endpointFor(resource) {
-  return `${apiBaseUrl}/${resource}/`
+  const apiPath = apiPaths[resource]
+
+  if (!apiPath) {
+    throw new Error(`Unknown API resource: ${resource}`)
+  }
+
+  return `${apiBaseUrl}${apiPath}`
 }
 
 export function normalizeCollection(payload) {
