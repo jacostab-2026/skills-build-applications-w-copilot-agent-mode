@@ -3,11 +3,12 @@ import './config/database.js';
 import { Activity, LeaderboardEntry, Team, User, Workout } from './models.js';
 
 const app = express();
-const port = Number(process.env.PORT) || 8000;
+const port = 8000;
+const host = '0.0.0.0';
 const codespaceName = process.env.CODESPACE_NAME;
 const baseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
-  : `http://localhost:${port}`;
+  : 'http://localhost:8000';
 
 app.use(express.json());
 
@@ -65,6 +66,6 @@ app.use((error: unknown, _request: express.Request, response: express.Response, 
   response.status(500).json({ message: 'Internal server error' });
 });
 
-app.listen(port, () => {
+app.listen(port, host, () => {
   console.log(`Octofit API listening at ${baseUrl}`);
 });
