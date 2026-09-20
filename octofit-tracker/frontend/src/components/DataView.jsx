@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { endpointFor, fetchCollection } from '../api'
 
-export function DataView({ resource, title, eyebrow, description, children, emptyMessage }) {
+export function DataView({ resource, endpointPath, title, eyebrow, description, children, emptyMessage }) {
   const [items, setItems] = useState([])
   const [status, setStatus] = useState('loading')
   const [error, setError] = useState('')
@@ -9,7 +9,7 @@ export function DataView({ resource, title, eyebrow, description, children, empt
   useEffect(() => {
     const controller = new AbortController()
 
-    fetchCollection(resource, controller.signal)
+    fetchCollection(resource, controller.signal, endpointPath)
       .then((collection) => {
         setItems(collection)
         setStatus('ready')
@@ -24,7 +24,7 @@ export function DataView({ resource, title, eyebrow, description, children, empt
       })
 
     return () => controller.abort()
-  }, [resource])
+  }, [resource, endpointPath])
 
   return (
     <section className="data-view" aria-labelledby={`${resource}-title`}>
@@ -32,7 +32,7 @@ export function DataView({ resource, title, eyebrow, description, children, empt
         <span>{eyebrow}</span>
         <h1 id={`${resource}-title`}>{title}</h1>
         <p>{description}</p>
-        <code>{endpointFor(resource)}</code>
+        <code>{endpointFor(resource, endpointPath)}</code>
       </div>
 
       {status === 'loading' && <div className="state-panel">Loading {title.toLowerCase()}...</div>}

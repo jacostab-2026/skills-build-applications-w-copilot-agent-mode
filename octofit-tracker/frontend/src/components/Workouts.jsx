@@ -4,6 +4,7 @@ function Workouts() {
   return (
     <DataView
       resource="workouts"
+      endpointPath="/api/workouts/"
       eyebrow="Suggestions"
       title="Workouts"
       description="Personalized training sessions and activity blocks served by the logic tier."

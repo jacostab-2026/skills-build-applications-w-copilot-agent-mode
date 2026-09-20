@@ -4,6 +4,7 @@ function Teams() {
   return (
     <DataView
       resource="teams"
+      endpointPath="/api/teams/"
       eyebrow="Team management"
       title="Teams"
       description="Training groups, descriptions, and member counts for the Octofit community."

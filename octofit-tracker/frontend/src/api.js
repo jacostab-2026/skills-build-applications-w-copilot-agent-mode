@@ -14,8 +14,8 @@ export const apiBaseUrl = codespaceName
 
 export const isCodespaceApiConfigured = Boolean(codespaceName)
 
-export function endpointFor(resource) {
-  const apiPath = apiPaths[resource]
+export function endpointFor(resource, endpointPath) {
+  const apiPath = endpointPath ?? apiPaths[resource]
 
   if (!apiPath) {
     throw new Error(`Unknown API resource: ${resource}`)
@@ -41,8 +41,8 @@ export function normalizeCollection(payload) {
   return collection ?? []
 }
 
-export async function fetchCollection(resource, signal) {
-  const response = await fetch(endpointFor(resource), { signal })
+export async function fetchCollection(resource, signal, endpointPath) {
+  const response = await fetch(endpointFor(resource, endpointPath), { signal })
 
   if (!response.ok) {
     throw new Error(`Request failed with ${response.status}`)

@@ -5,6 +5,7 @@ function Leaderboard() {
   return (
     <DataView
       resource="leaderboard"
+      endpointPath="/api/leaderboard/"
       eyebrow="Competition"
       title="Leaderboard"
       description="Ranked Octofit athletes and teams ordered by performance score."

@@ -4,6 +4,7 @@ function Users() {
   return (
     <DataView
       resource="users"
+      endpointPath="/api/users/"
       eyebrow="Profiles"
       title="Users"
       description="Authenticated Octofit members with goals, locations, and favorite activity types."

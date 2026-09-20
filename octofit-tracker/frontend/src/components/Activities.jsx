@@ -5,6 +5,7 @@ function Activities() {
   return (
     <DataView
       resource="activities"
+      endpointPath="/api/activities/"
       eyebrow="Activity log"
       title="Activities"
       description="Recent workouts, mileage, effort, and completion dates from the Octofit API."
